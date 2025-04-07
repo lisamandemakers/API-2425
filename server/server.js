@@ -71,3 +71,25 @@ const renderTemplate = (template, data) => {
   return engine.renderFileSync(template, templateData);
 };
 
+
+app.get('/books', async (req, res) => {
+  const query = req.query.query || 'flowers';
+  const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&key=${apiKey}`;
+
+  try {
+    const response = await fetch(url); // gewoon fetch gebruiken!
+    const json = await response.json();
+    const books = json.items?.map(item => ({
+      title: item.volumeInfo.title,
+      authors: item.volumeInfo.authors,
+      thumbnail: item.volumeInfo.imageLinks?.thumbnail,
+    })) || [];
+
+    return res.send(renderTemplate('server/views/books.liquid', { title: 'Books', books, query }));
+  } catch (error) {
+    console.error('Error fetching books:', error);
+    return res.status(500).send('Failed to fetch books');
+  }
+});
+
