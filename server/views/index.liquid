@@ -2,7 +2,6 @@
 
 {% block content %}
 
-<h1 class="h1">{{ title }}</h1>
 
 <ul class="grid">
   {% for item in items %}
@@ -14,4 +13,20 @@
   {% endfor %}
 </ul>
 
-{% endblock %}
+
+
+
+ <h1>{{ title }}</h1>
+
+<ul>
+  {% for book in books %}
+    <li>
+      <h2>{{ book.title }}</h2>
+      <p>Auteur: {% if book.authors %}{{ book.authors | join: ', ' }}{% else %}Onbekend{% endif %}</p>
+      <img src="{{ book.thumbnail }}" alt="{{ book.title }}" width="150">
+    </li>
+  {% endfor %}
+</ul>
+
+
+{% endblock %} 

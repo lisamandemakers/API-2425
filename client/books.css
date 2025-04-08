@@ -1,0 +1,8 @@
+.book-title {
+  background-color: rgb(0, 229, 255);
+}
+
+img {
+  border-radius: 10px;
+  background-image: linear-gradient(to bottom right, #ff7e5f, #feb47b);
+}
