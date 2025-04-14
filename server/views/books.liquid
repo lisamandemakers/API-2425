@@ -10,6 +10,7 @@
     <li>
       <h2 class="book-title">{{ book.title }}</h2>
       <p>Auteur: {% if book.authors %}{{ book.authors | join: ', ' }}{% else %}Onbekend{% endif %}</p>
+        <p>Rating: {{ book.rating }}</p>
       <img src="{{ book.thumbnail }}" alt="{{ book.title }}" width="150">
     </li>
   {% endfor %}

@@ -17,14 +17,32 @@ const app = new App();
 // Logger() laat in de terminal zien welke pagina's worden geladen.
 app
   .use(logger())
-  .use('/', sirv('dist'))
+  .use('/', sirv(process.env.NODE_ENV === 'development' ? 'client' : 'dist'))
   .listen(3000, () => console.log('Server available on http://localhost:3000'));
 
 // 6. Route voort home pagina
 // Render template zorgt ervoor dat de home page word gelinkt met de index.liquid & lijst van bloemen
-// app.get('/', async (req, res) => {
-//   return res.send(renderTemplate('server/views/index.liquid', { title: 'Home'}));
-// });
+app.get('/', async (req, res) => {
+  const query = req.query.query || 'atomic+habits';
+  const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
+  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&key=${apiKey}&maxResults=40`;
+
+  try {
+    const response = await fetch(url);
+    const json = await response.json();
+    const books = json.items?.map(item => ({
+      title: item.volumeInfo.title,
+      authors: item.volumeInfo.authors,
+      thumbnail: item.volumeInfo.imageLinks?.thumbnail,
+      rating: item.volumeInfo.averageRating || 'Geen rating',
+    })) || [];
+
+    return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', books, query }));
+  } catch (error) {
+    console.error('Error fetching books:', error);
+    return res.status(500).send('Failed to fetch books');
+  }
+});
 
 
 
@@ -41,6 +59,7 @@ app.get('/books', async (req, res) => {
       title: item.volumeInfo.title,
       authors: item.volumeInfo.authors,
       thumbnail: item.volumeInfo.imageLinks?.thumbnail,
+      rating: item.volumeInfo.averageRating || 'Geen rating',
     })) || [];
 
     return res.send(renderTemplate('server/views/books.liquid', { title: 'Books', books, query }));
@@ -64,7 +83,3 @@ const renderTemplate = (template, data) => {
 };
 
 
-
-app.post('/favourite/', async (req, res) => {}
-  
-) 
