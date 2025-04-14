@@ -24,9 +24,46 @@ app
 // Render template zorgt ervoor dat de home page word gelinkt met de index.liquid & lijst van bloemen
 app.get('/', async (req, res) => {
   const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
+  const query = req.query.query;
+  const category = req.query.category;
 
+  // 🔍 Zoekfunctie of categorie-filter
+  if (query || category) {
+    let searchQuery = query;
+
+    // Als alleen een categorie is gekozen (zonder zoekterm), gebruik die
+    if (!query && category) {
+      if (category === 'new') searchQuery = 'kristin';
+      if (category === 'literature') searchQuery = 'literature';
+      if (category === 'bestsellers') searchQuery = 'bestsellers';
+    }
+
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchQuery)}&key=${apiKey}&maxResults=40`;
+
+    try {
+      const response = await fetch(url);
+      const json = await response.json();
+      const books = (json.items || []).map(item => ({
+        title: item.volumeInfo.title,
+        authors: item.volumeInfo.authors,
+        thumbnail: item.volumeInfo.imageLinks?.thumbnail,
+      }));
+
+      return res.send(renderTemplate('server/views/index.liquid', {
+        title: 'Zoekresultaten',
+        query,
+        category,
+        searchResults: books,
+      }));
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+      return res.status(500).send('Zoeken mislukt');
+    }
+  }
+
+  // 📚 Standaardcategorieën op homepage
   const categories = {
-    newReleases: 'new+books',
+    newReleases: 'kristin',
     literature: 'literature',
     bestSelling: 'bestsellers',
   };
@@ -53,7 +90,7 @@ app.get('/', async (req, res) => {
 
     return res.send(renderTemplate('server/views/index.liquid', {
       title: 'Home',
-      ...data, // bevat newReleases, literature, bestSelling
+      ...data,
     }));
   } catch (error) {
     console.error('Error fetching books:', error);

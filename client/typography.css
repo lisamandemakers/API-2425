@@ -1,12 +1,26 @@
-body {
-  font-family: system-ui, sans-serif;
-  font-weight: 400;
+@font-face {
+  font-family: 'NewYork';
+  src: url('/fonts/NewYork.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.h1 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  font-weight: 600;
+body {
+  font-family: NewYork;
+  font-weight: 100;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 300;
+  color: --dark-blue;
+  margin-bottom: 0.3em;
+}
+
+.text-box p {
+  /* background-color: blue; */
+  font-family: inter;
+  font-weight: 400;
 }
 
 .h2 {

@@ -14,13 +14,15 @@
 
 
 
-body {
-  color: black;
-  max-width: 1440px;
-  margin: 0 auto;
-  /* background-color: aqua; */
-}
-
-main {
-  padding: 1rem;
-}
+:root {
+    /* fonts */
+    --main-font: NewYork;
+    --body-text-font: inter;
+  
+    /* colors */
+    --dark-blue: #092353;
+    --purple: #8C92EF;
+    --pink: #F3D6F2;
+  
+  }
+  

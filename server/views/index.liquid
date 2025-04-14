@@ -1,40 +1,78 @@
 {% layout "server/layouts/base.liquid" %}
 {% block content %}
-  <h1>{{ title }}</h1>
+  <!-- 🔍 Zoekformulier -->
 
-  <!-- 🆕 New Releases -->
-  <section>
-    <h2>Nieuwste Boeken</h2>
-    <ul class="books-grid">
-      {% for book in newReleases %}
-        <li>
-          <img src="{{ book.thumbnail }}" alt="Cover van {{ book.title }}">
-        </li>
-      {% endfor %}
-    </ul>
+  <section class="home-banner">
+    <div class="text-box">
+    <h1>Space <span>Library</span></h1>
+    <p>Lose yourself in stories, find yourself in words.</p>
+    </div>
+    <div class="image-box">
+      <img src="/images/books.png" alt="books">
+    </div>
   </section>
 
-  <!-- 📚 Literature -->
-  <section>
-    <h2>Literatuur</h2>
-    <ul class="books-grid">
-      {% for book in literature %}
-        <li>
-          <img src="{{ book.thumbnail }}" alt="Cover van {{ book.title }}">
-        </li>
-      {% endfor %}
-    </ul>
-  </section>
+  <div class="book-content">
+  <form method="GET" action="/" class="search-form">
+  <div class="search-input">
+    <input type="text" name="query" value="{{ query }}" placeholder="Zoek naar boeken..." class="search-input-field" />
+  </div>
 
-  <!-- 🔥 Best Selling -->
-  <section>
-    <h2>Bestsellers</h2>
-    <ul class="books-grid">
-      {% for book in bestSelling %}
-        <li>
-          <img src="{{ book.thumbnail }}" alt="Cover van {{ book.title }}">
-        </li>
-      {% endfor %}
-    </ul>
-  </section>
+  <div class="search-category">
+    <select name="category" class="search-category-select">
+      <option value="">Kies een categorie</option>
+      <option value="new" {% if category == "new" %}selected{% endif %}>Nieuwste boeken</option>
+      <option value="literature" {% if category == "literature" %}selected{% endif %}>Literatuur</option>
+      <option value="bestsellers" {% if category == "bestsellers" %}selected{% endif %}>Bestsellers</option>
+    </select>
+  </div>
+  
+  <button type="submit" class="search-button">Zoek</button>
+</form>
+
+  {% if searchResults %}
+  
+      <h2>Zoekresultaten voor "{{ query }}"</h2>
+      <ul class="books-grid">
+        {% for book in searchResults %}
+          <li class="book-card">
+            <img src="{{ book.thumbnail }}" alt="Cover van {{ book.title }}">
+          </li>
+        {% endfor %}
+      </ul>
+   
+  {% else %}
+    <!-- De drie standaard categorieën -->
+      <section>
+        <h2>Nieuwste Boeken</h2>
+        <ul class="books-grid">
+          {% for book in newReleases %}
+            <li class="book-card">
+              <img src="{{ book.thumbnail }}" alt="Cover van {{ book.title }}">
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+      <section>
+        <h2>Literatuur</h2>
+        <ul class="books-grid">
+          {% for book in literature %}
+            <li class="book-card">
+              <img src="{{ book.thumbnail }}" alt="Cover van {{ book.title }}">
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+      <section>
+        <h2>Bestsellers</h2>
+        <ul class="books-grid">
+          {% for book in bestSelling %}
+            <li class="book-card">
+              <img src="{{ book.thumbnail }}" alt="Cover van {{ book.title }}">
+            </li>
+          {% endfor %}
+        </ul>
+      </section>
+    </div>
+  {% endif %}
 {% endblock %}

@@ -8,24 +8,13 @@
   --purple: #8C92EF;
   --pink: #F3D6F2;
 
-
 }
 
+main {
+ display: flex;
+ flex-direction: column;
 
 
-
-.grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-}
-
-
-/* Styling voor de hero section */
-.hero {
-  text-align: center;
-  padding: 20px;
-  background-color: #f5f5f5;
 }
 
 /* Zoekformulier styling */
@@ -37,22 +26,112 @@
 /* Grid voor de boeken */
 .books-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  padding: 20px;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 3rem;
+  padding-top: 1rem;
 }
 
-/* Styling voor elke boek kaart */
+.book-card img {
+  width: 100% ;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  z-index: -2;
+  position: relative;
+}
+
 .book-card {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
-  background-color: #fff;
+  box-shadow: inset 0 -90px 25px -30px rgb(255, 255, 255);
+  
 }
 
 
-@media (min-width: 768px) {
-  .books-grid {
-    grid-template-columns: repeat(6, 1fr);
+/* Algemeen formulier styling */
+.search-form {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+  max-width: 600px;
+  /* background-color: blue; */
+}
+
+.search-input {
+  width: 100%;
+}
+
+.search-input-field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.search-category {
+  width: 100%;
+}
+
+.search-category-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: #8C92EF; /* Kleur voor de button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #6a7ec2; /* Donkerdere tint voor hover */
+}
+
+/* Styling voor kleine schermen (mobiel) */
+@media (max-width: 400px) {
+  main {
+    margin: 1em;
+    grid-template-columns: repeat(10px, 1fr);
   }
+
+  .books-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1em;
+    margin-top: 2em;
+  }
+
+  
+  }
+
+
+.home-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  background-image: url('/images/gradient-background.jpg');
+  flex-wrap: wrap;
+  /* background-size: cover; */
+}
+
+.home-banner img  {
+  width: 500px;
+}
+
+.home-banner .text-box {
+  margin: 5em;
+
+}
+
+.book-content {
+  margin: 5rem;
 }
