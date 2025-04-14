@@ -23,21 +23,38 @@ app
 // 6. Route voort home pagina
 // Render template zorgt ervoor dat de home page word gelinkt met de index.liquid & lijst van bloemen
 app.get('/', async (req, res) => {
-  const query = req.query.query || 'atomic+habits';
   const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
-  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&key=${apiKey}&maxResults=40`;
+
+  const categories = {
+    newReleases: 'new+books',
+    literature: 'literature',
+    bestSelling: 'bestsellers',
+  };
 
   try {
-    const response = await fetch(url);
-    const json = await response.json();
-    const books = json.items?.map(item => ({
-      title: item.volumeInfo.title,
-      authors: item.volumeInfo.authors,
-      thumbnail: item.volumeInfo.imageLinks?.thumbnail,
-      rating: item.volumeInfo.averageRating || 'Geen rating',
-    })) || [];
+    const results = await Promise.all(
+      Object.entries(categories).map(async ([key, query]) => {
+        const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&key=${apiKey}&maxResults=12`;
+        const response = await fetch(url);
+        const json = await response.json();
 
-    return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', books, query }));
+        return [
+          key,
+          (json.items || []).map(item => ({
+            title: item.volumeInfo.title,
+            authors: item.volumeInfo.authors,
+            thumbnail: item.volumeInfo.imageLinks?.thumbnail,
+          })),
+        ];
+      })
+    );
+
+    const data = Object.fromEntries(results);
+
+    return res.send(renderTemplate('server/views/index.liquid', {
+      title: 'Home',
+      ...data, // bevat newReleases, literature, bestSelling
+    }));
   } catch (error) {
     console.error('Error fetching books:', error);
     return res.status(500).send('Failed to fetch books');

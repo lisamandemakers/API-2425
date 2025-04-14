@@ -1,30 +1,40 @@
 {% layout "server/layouts/base.liquid" %}
-
 {% block content %}
   <h1>{{ title }}</h1>
 
-  <!-- 🔍 Zoekformulier -->
-  <form method="GET" action="/">
-    <input type="text" name="query" value="{{ query }}" placeholder="Zoek naar boeken..." />
-    <button type="submit">Zoek</button>
-  </form>
-
-  <!-- 📚 Boekenlijst -->
-  {% if books and books.size > 0 %}
+  <!-- 🆕 New Releases -->
+  <section>
+    <h2>Nieuwste Boeken</h2>
     <ul class="books-grid">
-      {% for book in books %}
+      {% for book in newReleases %}
         <li>
-          <h2>{{ book.title }}</h2>
-          <p>Auteur: {% if book.authors %}{{ book.authors | join: ', ' }}{% else %}Onbekend{% endif %}</p>
-          {% if book.thumbnail %}
-            <img src="{{ book.thumbnail }}" alt="Boekcover van {{ book.title }}" width="150">
-          {% endif %}
-          <p>Rating: {{ book.rating }}</p>
+          <img src="{{ book.thumbnail }}" alt="Cover van {{ book.title }}">
         </li>
       {% endfor %}
     </ul>
-  {% else %}
-    <p>Geen boeken gevonden voor "{{ query }}".</p>
-  {% endif %}
-{% endblock %}
+  </section>
 
+  <!-- 📚 Literature -->
+  <section>
+    <h2>Literatuur</h2>
+    <ul class="books-grid">
+      {% for book in literature %}
+        <li>
+          <img src="{{ book.thumbnail }}" alt="Cover van {{ book.title }}">
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <!-- 🔥 Best Selling -->
+  <section>
+    <h2>Bestsellers</h2>
+    <ul class="books-grid">
+      {% for book in bestSelling %}
+        <li>
+          <img src="{{ book.thumbnail }}" alt="Cover van {{ book.title }}">
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endblock %}
