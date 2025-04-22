@@ -4,6 +4,25 @@ import { App } from '@tinyhttp/app';
 import { logger } from '@tinyhttp/logger';
 import { Liquid } from 'liquidjs';
 import sirv from 'sirv';
+import fetch from 'node-fetch';
+import { LocalStorage } from 'node-localstorage';
+
+// Maak een opslagmap aan ('scratch') waar alles wordt opgeslagen
+const localStorage = new LocalStorage('./scratch');
+
+
+// Haal opgeslagen favorieten op, of begin met een lege array
+const getFavorites = () => {
+  const stored = localStorage.getItem('favorites');
+  return stored ? JSON.parse(stored) : [];
+};
+
+// Sla favorieten op in LocalStorage
+const saveFavorites = (favorites) => {
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+};
+// localStorage.setItem('favorites', []);
+
 
 
 // 3. LiquidJS instellen, zorgt ervoor dat alle .liquid bestanden worden verwerkt
@@ -13,15 +32,14 @@ const engine = new Liquid({
 
 // 4. Webserver maken met TinyHTTP
 const app = new App();
+
 // 5. Middelware instellen en service starten
-// Logger() laat in de terminal zien welke pagina's worden geladen.
 app
   .use(logger())
   .use('/', sirv(process.env.NODE_ENV === 'development' ? 'client' : 'dist'))
   .listen(3000, () => console.log('Server available on http://localhost:3000'));
 
-// 6. Route voort home pagina
-// Render template zorgt ervoor dat de home page word gelinkt met de index.liquid & lijst van bloemen
+// 6. Homepagina met categorieën en zoekfunctie
 app.get('/', async (req, res) => {
   const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
   const query = req.query.query;
@@ -31,7 +49,6 @@ app.get('/', async (req, res) => {
   if (query || category) {
     let searchQuery = query;
 
-    // Als alleen een categorie is gekozen (zonder zoekterm), gebruik die
     if (!query && category) {
       if (category === 'new') searchQuery = 'kristin';
       if (category === 'literature') searchQuery = 'literature';
@@ -44,6 +61,7 @@ app.get('/', async (req, res) => {
       const response = await fetch(url);
       const json = await response.json();
       const books = (json.items || []).map(item => ({
+        id: item.id,
         title: item.volumeInfo.title,
         authors: item.volumeInfo.authors,
         thumbnail: item.volumeInfo.imageLinks?.thumbnail,
@@ -78,6 +96,7 @@ app.get('/', async (req, res) => {
         return [
           key,
           (json.items || []).map(item => ({
+            id: item.id,
             title: item.volumeInfo.title,
             authors: item.volumeInfo.authors,
             thumbnail: item.volumeInfo.imageLinks?.thumbnail,
@@ -98,35 +117,49 @@ app.get('/', async (req, res) => {
   }
 });
 
-
-
-app.get('/books', async (req, res) => {
-  const query = req.query.query || 'atomic+habits';
+// 7. Boek-detailpagina op basis van ID
+app.get('/book/:id', async (req, res) => {
   const apiKey = process.env.GOOGLE_BOOKS_API_KEY;
-  const url = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&key=${apiKey}&maxResults=40`;
+  const id = req.params.id;
 
+  const url = `https://www.googleapis.com/books/v1/volumes/${id}?key=${apiKey}`;
 
   try {
-    const response = await fetch(url); // gewoon fetch gebruiken!
-    const json = await response.json(); // json is een object
-    const books = json.items?.map(item => ({  //  json.items zijn alle gevonden boeken, map() laat alleen de stukjes zien die we willen zien (volgende regels)
+    const response = await fetch(url);
+    const item = await response.json();
+
+    const book = {
+      id: item.id,
       title: item.volumeInfo.title,
+      date: item.volumeInfo.publishedDate,
       authors: item.volumeInfo.authors,
+      description: item.volumeInfo.description,
       thumbnail: item.volumeInfo.imageLinks?.thumbnail,
       rating: item.volumeInfo.averageRating || 'Geen rating',
-    })) || [];
+    };
 
-    return res.send(renderTemplate('server/views/books.liquid', { title: 'Books', books, query }));
+    return res.send(renderTemplate('server/views/detail.liquid', {
+      title: book.title,
+      book,
+    }));
   } catch (error) {
-    console.error('Error fetching books:', error);
-    return res.status(500).send('Failed to fetch books');
+    console.error('Error fetching book detail:', error);
+    return res.status(500).send('Boek ophalen mislukt');
   }
 });
 
+// 8. Favorietenpagina
+app.get('/favorites', (req, res) => {
+  const favorites = getFavorites();
 
-// 8. Functie om liquid templates te renderen
-// .liquid docs worden gevuld → kijkt of de app in ontwikkelmodus (dev) of live (production) staat
-// engine.renderFileSync(template, templateData) → Rendert het opgegeven Liquid-template en vult het met data.
+  return res.send(renderTemplate('server/views/favorites.liquid', {
+    title: 'Favorieten',
+    favorites,
+  }));
+});
+
+
+// 9. Template-rendering functie
 const renderTemplate = (template, data) => {
   const templateData = {
     NODE_ENV: process.env.NODE_ENV || 'production',
@@ -136,4 +169,65 @@ const renderTemplate = (template, data) => {
   return engine.renderFileSync(template, templateData);
 };
 
+
+// 10. Favorieten opslaan (tijdelijk in geheugen)
+app.post('/favorites/:id', async (req, res) => {
+  const id = req.params.id
+  try {
+    const chunks = [];
+    for await (const chunk of req) {
+      chunks.push(chunk);
+    }
+    const body = Buffer.concat(chunks).toString();
+    const data = new URLSearchParams(body);
+
+    const book = {
+      id: id,
+      title: data.get('title'),
+      authors: data.get('authors')?.split(','),
+      thumbnail: data.get('thumbnail'),
+    };
+
+    const favorites = getFavorites();
+    // Voeg toe als boek nog niet bestaat
+    if (!favorites.find(savedBook => savedBook.id === book.id)) {
+      favorites.push(book);
+      saveFavorites(favorites);
+    }
+
+    return res.redirect('/book/'+id);
+
+  } catch (error) {
+    console.error('Favoriet toevoegen mislukt:', error);
+    res.status(500).send('Fout bij opslaan favoriet');
+  }
+});
+
+
+app.post('/favorites/delete/:id', async (req, res) => {
+  const idToDelete = req.params.id
+  const favorites = getFavorites()
+  
+  const filtered = favorites.filter(favorite => {
+    if (favorite.id !== idToDelete) {
+      return favorite;
+    } 
+  })
+
+  saveFavorites(filtered);
+
+    return res.redirect('/favorites');
+
+  // try {
+  //   console.log(idToDelete)
+
+  //   // Verwijder het boek met dat id
+  //   // favorites = favorites.filter(book => book.id !== idToDelete);
+
+  //   return res.redirect('/favorites');
+  // } catch (error) {
+  //   console.error('Fout bij verwijderen favoriet:', error);
+  //   res.status(500).send('Verwijderen mislukt');
+  // }
+});
 

@@ -28,6 +28,8 @@
   </div>
   
   <button type="submit" class="search-button">Zoek</button>
+  <a href="/favorites" class="favorites-button">⭐ Bekijk mijn favorieten</a>
+
 </form>
 
   {% if searchResults %}
@@ -35,9 +37,7 @@
       <h2>Zoekresultaten voor "{{ query }}"</h2>
       <ul class="books-grid">
         {% for book in searchResults %}
-          <li class="book-card">
-            <img src="{{ book.thumbnail }}" alt="Cover van {{ book.title }}">
-          </li>
+        {% render '../components/card/card.liquid', book: book  %}
         {% endfor %}
       </ul>
    
@@ -47,9 +47,7 @@
         <h2>Nieuwste Boeken</h2>
         <ul class="books-grid">
           {% for book in newReleases %}
-            <li class="book-card">
-              <img src="{{ book.thumbnail }}" alt="Cover van {{ book.title }}">
-            </li>
+            {% render '../components/card/card.liquid', book: book  %}
           {% endfor %}
         </ul>
       </section>
@@ -57,9 +55,7 @@
         <h2>Literatuur</h2>
         <ul class="books-grid">
           {% for book in literature %}
-            <li class="book-card">
-              <img src="{{ book.thumbnail }}" alt="Cover van {{ book.title }}">
-            </li>
+            {% render '../components/card/card.liquid', book: book  %}
           {% endfor %}
         </ul>
       </section>
@@ -67,9 +63,7 @@
         <h2>Bestsellers</h2>
         <ul class="books-grid">
           {% for book in bestSelling %}
-            <li class="book-card">
-              <img src="{{ book.thumbnail }}" alt="Cover van {{ book.title }}">
-            </li>
+            {% render '../components/card/card.liquid', book: book  %}
           {% endfor %}
         </ul>
       </section>

@@ -1,19 +1,20 @@
-@font-face {
+/* @font-face {
   font-family: 'NewYork';
-  src: url('/fonts/NewYork.otf') format('opentype');
+  src: url('fonts/NewYork.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
-}
+} */
 
 body {
   font-family: NewYork;
   font-weight: 100;
+  color: var(--dark-blue);
 }
 
 h1 {
+  font-family: var( --main-font);
   font-size: 4rem;
   font-weight: 300;
-  color: --dark-blue;
   margin-bottom: 0.3em;
 }
 
@@ -23,9 +24,21 @@ h1 {
   font-weight: 400;
 }
 
-.h2 {
-  font-size: 1.25rem;
-  margin-bottom: 10px;
-  font-weight: 600;
-  
+h2 {
+  font-family: var( --main-font);
+  font-size: 2rem;
+  /* margin-bottom: 1em; */
+  opacity: 0.5;
+}
+
+
+.book-info p {
+  font-weight: 400;
+  opacity: 0.3;
+font-size: 1.3em;
+}
+
+a {
+  font-family: var( --body-text-font);
+  font-weight: 400;
 }
