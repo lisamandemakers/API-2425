@@ -4,7 +4,7 @@ console.log('Hello, world!');
 
 // 🩷 FAVORIETEN KNOP LIKED
 document.addEventListener('DOMContentLoaded', function() {
-  const btns = document.querySelectorAll('.btn');
+  const btns = document.querySelectorAll('.favorite-btn');
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
       btn.classList.toggle('liked');
@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-
+// ✨ VIBRATION API
 document.addEventListener('DOMContentLoaded', () => {
-  const form = document.querySelector('.favorite-form');
+  const forms = document.querySelectorAll('.favorite-form');
 
-  if (form) {
+  forms.forEach(form => {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -29,14 +29,25 @@ document.addEventListener('DOMContentLoaded', () => {
           body: new URLSearchParams(formData),
         });
 
-       
+        // Voeg 'liked' klasse toe aan de knop
+        const submitButton = form.querySelector('.favorite-btn');
+        if (submitButton) {
+          submitButton.classList.add('liked');
+        }
+
+        // Vibratie toevoegen (indien ondersteund)
+        if (navigator.vibrate) {
+          navigator.vibrate(100); // 100ms trilling
+        }
+
       } catch (err) {
         console.error("Fout bij toevoegen aan favorieten:", err);
         alert("Er ging iets mis...");
       }
     });
-  }
+  });
 });
+
 
 
 
