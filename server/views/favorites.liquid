@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>Je favorieten</h1>
-
+{% comment %} 
 <ul class="favorites-list">
   {% if favorites.length == 0 %}
     <p>Je hebt nog geen favorieten.</p>
@@ -11,7 +11,7 @@
       <li>
  
         <h3>{{ book.title }}</h3>
-        <p>{{ book.authors | join: ', ' }}</p>
+
 
         <!-- Verwijderknop -->
         <form action="/favorites/delete/{{ book.id }}" method="POST" style="margin-top: 10px;">
@@ -20,5 +20,69 @@
       </li>
     {% endfor %}
   {% endif %}
-</ul>
+</ul> {% endcomment %}
+
+<div class="bookcase">
+  <!-- Eerste plank -->
+  <div class="shelf">
+    {% if favorites.length == 0 %}
+      <p>Je hebt nog geen favorieten.</p>
+    {% else %}
+      {% for book in favorites %}
+        <div class="book">
+          <a href="/book/{{ book.id }}" class="book-link">
+            <div class="book-title-shelf">
+              <h3>{{ book.title }}</h3>
+            </div>
+          </a>
+          <form action="/favorites/delete/{{ book.id }}" method="POST">
+            <button type="submit" class="delete-btn">🗑️</button>
+          </form>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <!-- Tweede plank -->
+  <div class="shelf">
+    {% if favorites.length == 0 %}
+      <p>Je hebt nog geen favorieten.</p>
+    {% else %}
+      {% for book in favorites %}
+        <div class="book">
+          <a href="/book/{{ book.id }}" class="book-link">
+            <div class="book-title-shelf">
+              <h3>{{ book.title }}</h3>
+            </div>
+          </a>
+          <form action="/favorites/delete/{{ book.id }}" method="POST">
+            <button type="submit" class="delete-btn">🗑️</button>
+          </form>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <!-- Derde plank -->
+  <div class="shelf">
+    {% if favorites.length == 0 %}
+      <p>Je hebt nog geen favorieten.</p>
+    {% else %}
+      {% for book in favorites %}
+        <div class="book">
+          <a href="/book/{{ book.id }}" class="book-link">
+            <div class="book-title-shelf">
+              <h3>{{ book.title }}</h3>
+            </div>
+          </a>
+          {% comment %} <form action="/favorites/delete/{{ book.id }}" method="POST">
+            <button type="submit" class="delete-btn">🗑️</button>
+          </form> {% endcomment %}
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+
 {% endblock %}
