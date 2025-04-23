@@ -58,6 +58,8 @@
     overflow-y: auto; /* scroll werkt nu echt */
     padding-right: 1rem;
     line-height: 1.5;
+    font-weight: 400;
+
   
 
   
@@ -71,16 +73,22 @@
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 3px;
   }
+
+  /* btn container */
+
+  .btn-container {
+    display: flex;
+gap: 2em;
+  }
   
   
   .book-buttons {
     display: flex;
     gap: 1rem;
   }
-  
- .btn {
+   .favorite-btn, .speak-btn {
     padding: 0.8rem 1.5rem;
-    background-color: #F3D6F2;
+    background-color: var(--purple);
     color: var(--dark-blue);
     font-weight: 500;
     border: none;
@@ -90,11 +98,38 @@
     font-size: 1rem;
     transition: background-color 0.3s ease;
     position: relative;
+    color: white;
     padding-right: 3em;
   }
 
+  .speak-btn::after {
+    content: "\f075";
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 400; /* Outline */
+    color: var(--purple); /* Kleur blijft rood */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.7em;
+    aspect-ratio: 1;
+    background-color: #ffffff;
+    position: absolute;
+    right: 0.8em;
+    bottom: 0.5em;
+    border-radius: 50%;
+    transition: font-weight 0.3s ease;
 
-  .btn::after {
+  }
+
+
+  .favorite-btn {
+  
+    background-color: var(--pink);
+   color: var(--dark-blue);
+  }
+
+
+  .favorite-btn::after {
     content: "\f004";
     font-family: 'Font Awesome 5 Free';
     font-weight: 400; /* Outline */
@@ -111,6 +146,8 @@
     border-radius: 50%;
     transition: font-weight 0.3s ease;
   }
+
+
   
   .btn.liked::after {
     font-weight: 900; /* Gevuld hart */
@@ -118,7 +155,9 @@
   .book-buttons .btn:hover {
     background-color: #444;
   }
+
   
+
 
   .navigation-bar {
     display: flex;

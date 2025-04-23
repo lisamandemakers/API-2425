@@ -2,7 +2,7 @@ import './index.css';
 
 console.log('Hello, world!');
 
-
+// 🩷 FAVORIETEN KNOP LIKED
 document.addEventListener('DOMContentLoaded', function() {
   const btns = document.querySelectorAll('.btn');
   btns.forEach(btn => {
@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
-
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -34,6 +33,46 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {
         console.error("Fout bij toevoegen aan favorieten:", err);
         alert("Er ging iets mis...");
+      }
+    });
+  }
+});
+
+
+
+// 🔊 WEB SPEECH API
+// 🔊 SPEECH API
+// 🔊 SPEECH API
+document.addEventListener('DOMContentLoaded', () => {
+  const speakBtn = document.querySelector('#speakButton');
+  const descriptionEl = document.querySelector('.book-description');
+  const synth = window.speechSynthesis;
+
+  let isSpeaking = false;
+
+  if (speakBtn && descriptionEl) {
+    speakBtn.addEventListener('click', () => {
+      if (isSpeaking) {
+        // Stop het voorlezen
+        synth.cancel();
+        speakBtn.textContent = 'Read Aloud';
+        isSpeaking = false;
+      } else {
+        const text = descriptionEl.textContent;
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';  // Engels (VS) als taal
+
+        // Als het klaar is met voorlezen: knoptekst resetten
+        utterance.onend = () => {
+          speakBtn.textContent = '🔊 Read Aloud';
+          isSpeaking = false;
+        };
+
+        // Start voorlezen
+        synth.speak(utterance);
+        speakBtn.textContent = 'Stop Reading';
+        isSpeaking = true;
       }
     });
   }

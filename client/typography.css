@@ -32,11 +32,16 @@ h2 {
 }
 
 
-.book-info p {
+.book-header p {
   font-weight: 400;
   opacity: 0.3;
 font-size: 1.3em;
 }
+
+.book-description {
+  font-weight: 300;
+}
+
 
 a {
   font-family: var( --body-text-font);

@@ -20,21 +20,25 @@
     <div class="book-description">
       {{ book.description }}
     </div>
-  
-    {% assign idString = book.id | append: "" %}
-    {% assign isFavorited = favorites contains idString %}
-    <form class="favorite-form" action="/favorites/{{ book.id }}" method="POST">
-    <input type="hidden" name="id" value="{{ book.id }}">
-    <input type="hidden" name="title" value="{{ book.title }}">
-    <input type="hidden" name="authors" value="{{ book.authors }}">
-    <input type="hidden" name="thumbnail" value="{{ book.thumbnail }}">
-    <button class="btn" type="submit">
-        {% if isFavorited %}
-            Verwijder uit favorieten
-        {% else %}
-            Voeg toe aan favorieten
-        {% endif %}
-    </button>
-</form>
-  
+
+    <div class="btn-container">
+      {% assign idString = book.id | append: "" %}
+      {% assign isFavorited = favorites contains idString %}
+      
+      <!-- Formulier voor toevoegen aan favorieten -->
+      <form class="favorite-form" action="/favorites/{{ book.id }}" method="POST">
+        <input type="hidden" name="id" value="{{ book.id }}">
+        <input type="hidden" name="title" value="{{ book.title }}">
+        <input type="hidden" name="authors" value="{{ book.authors }}">
+        <input type="hidden" name="thumbnail" value="{{ book.thumbnail }}">
+        <button class="favorite-btn" type="submit">
+          Add to Favorites
+        </button>
+      </form>
+      
+      <!-- Spraakknop -->
+      <button class="speak-btn" id="speakButton">Read Aloud</button>
+    </div>
+
+
 {% endblock %}
