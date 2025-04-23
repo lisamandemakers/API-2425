@@ -231,4 +231,3 @@ app.post('/favorites/delete/:id', async (req, res) => {
   //   res.status(500).send('Verwijderen mislukt');
   // }
 });
-
