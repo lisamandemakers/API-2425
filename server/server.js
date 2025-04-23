@@ -135,7 +135,6 @@ app.get('/book/:id', async (req, res) => {
       authors: item.volumeInfo.authors,
       description: item.volumeInfo.description,
       thumbnail: item.volumeInfo.imageLinks?.thumbnail,
-      rating: item.volumeInfo.averageRating || 'Geen rating',
     };
 
     return res.send(renderTemplate('server/views/detail.liquid', {
