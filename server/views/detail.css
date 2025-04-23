@@ -78,7 +78,7 @@
     gap: 1rem;
   }
   
-  .book-buttons .btn {
+ .btn {
     padding: 0.8rem 1.5rem;
     background-color: #F3D6F2;
     color: var(--dark-blue);
@@ -93,23 +93,28 @@
     padding-right: 3em;
   }
 
-  .book-buttons .btn::after {
+
+  .btn::after {
     content: "\f004";
-    display: flex;
-  align-items: center;
-  justify-content: center;
     font-family: 'Font Awesome 5 Free';
+    font-weight: 400; /* Outline */
+    color: #e63946; /* Kleur blijft rood */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 1.7em;
     aspect-ratio: 1;
     background-color: #ffffff;
     position: absolute;
-   right: 0.8em;
-   bottom: 0.5em;
-   border-radius: 50%;
-
-
+    right: 0.8em;
+    bottom: 0.5em;
+    border-radius: 50%;
+    transition: font-weight 0.3s ease;
   }
   
+  .btn.liked::after {
+    font-weight: 900; /* Gevuld hart */
+  }
   .book-buttons .btn:hover {
     background-color: #444;
   }

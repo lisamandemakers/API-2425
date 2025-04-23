@@ -23,12 +23,18 @@
   
     {% assign idString = book.id | append: "" %}
     {% assign isFavorited = favorites contains idString %}
-    <form action="/favorites/{{ book.id }}" method="POST">
+    <form class="favorite-form" action="/favorites/{{ book.id }}" method="POST">
     <input type="hidden" name="id" value="{{ book.id }}">
     <input type="hidden" name="title" value="{{ book.title }}">
     <input type="hidden" name="authors" value="{{ book.authors }}">
     <input type="hidden" name="thumbnail" value="{{ book.thumbnail }}">
-    <button class="btn" type="submit">❤️ Voeg toe aan favorieten</button>
-  </form>
+    <button class="btn" type="submit">
+        {% if isFavorited %}
+            Verwijder uit favorieten
+        {% else %}
+            Voeg toe aan favorieten
+        {% endif %}
+    </button>
+</form>
   
 {% endblock %}

@@ -141,6 +141,7 @@ app.get('/book/:id', async (req, res) => {
     return res.send(renderTemplate('server/views/detail.liquid', {
       title: book.title,
       book,
+      favorites: getFavorites().map(f => f.id), // Voeg dit toe!
     }));
   } catch (error) {
     console.error('Error fetching book detail:', error);
@@ -206,12 +207,12 @@ app.post('/favorites/:id', async (req, res) => {
 
 app.post('/favorites/delete/:id', async (req, res) => {
   const idToDelete = req.params.id
+
   const favorites = getFavorites()
-  
   const filtered = favorites.filter(favorite => {
     if (favorite.id !== idToDelete) {
       return favorite;
-    } 
+    }
   })
 
   saveFavorites(filtered);

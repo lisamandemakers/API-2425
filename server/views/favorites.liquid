@@ -1,7 +1,8 @@
 {% layout "server/layouts/base.liquid" %}
 
 {% block content %}
-<h1>Je favorieten</h1>
+<div class="favorite-content">
+<h1>Your favorites</h1>
 {% comment %} 
 <ul class="favorites-list">
   {% if favorites.length == 0 %}
@@ -36,12 +37,31 @@
             </div>
           </a>
           <form action="/favorites/delete/{{ book.id }}" method="POST">
-            <button type="submit" class="delete-btn">🗑️</button>
+           <button type="submit" class="delete-btn" aria-label="Verwijderen">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="20" height="20"
+                 fill="none"
+                 stroke="var(--dark-blue)"
+                 stroke-width="1.5"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 viewBox="0 0 24 24">
+              <!-- Deksel -->
+              <rect x="4" y="3" width="16" height="4" rx="1"/>
+              <!-- Body van de prullenbak -->
+              <rect x="6" y="7" width="12" height="14" rx="2"/>
+              <!-- Pennenbakken/openingen -->
+              <line x1="10" y1="11" x2="10" y2="17"/>
+              <line x1="14" y1="11" x2="14" y2="17"/>
+            </svg>
+          </button>
           </form>
         </div>
       {% endfor %}
     {% endif %}
   </div>
+
+  
 
   <!-- Tweede plank -->
   <div class="shelf">
@@ -56,7 +76,24 @@
             </div>
           </a>
           <form action="/favorites/delete/{{ book.id }}" method="POST">
-            <button type="submit" class="delete-btn">🗑️</button>
+          <button type="submit" class="delete-btn" aria-label="Verwijderen">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="20" height="20"
+                 fill="none"
+                 stroke="var(--dark-blue)"
+                 stroke-width="1.5"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 viewBox="0 0 24 24">
+              <!-- Deksel -->
+              <rect x="4" y="3" width="16" height="4" rx="1"/>
+              <!-- Body van de prullenbak -->
+              <rect x="6" y="7" width="12" height="14" rx="2"/>
+              <!-- Pennenbakken/openingen -->
+              <line x1="10" y1="11" x2="10" y2="17"/>
+              <line x1="14" y1="11" x2="14" y2="17"/>
+            </svg>
+          </button>
           </form>
         </div>
       {% endfor %}
@@ -75,14 +112,31 @@
               <h3>{{ book.title }}</h3>
             </div>
           </a>
-          {% comment %} <form action="/favorites/delete/{{ book.id }}" method="POST">
-            <button type="submit" class="delete-btn">🗑️</button>
-          </form> {% endcomment %}
+         <form action="/favorites/delete/{{ book.id }}" method="POST">
+         <button type="submit" class="delete-btn" aria-label="Verwijderen">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="20" height="20"
+                 fill="none"
+                 stroke="var(--dark-blue)"
+                 stroke-width="1.5"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 viewBox="0 0 24 24">
+              <!-- Deksel -->
+              <rect x="4" y="3" width="16" height="4" rx="1"/>
+              <!-- Body van de prullenbak -->
+              <rect x="6" y="7" width="12" height="14" rx="2"/>
+              <!-- Pennenbakken/openingen -->
+              <line x1="10" y1="11" x2="10" y2="17"/>
+              <line x1="14" y1="11" x2="14" y2="17"/>
+            </svg>
+          </button>
+          </form> 
         </div>
       {% endfor %}
     {% endif %}
   </div>
 </div>
-
+</div>
 
 {% endblock %}
