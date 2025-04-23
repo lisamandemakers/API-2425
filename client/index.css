@@ -1,6 +1,7 @@
 /* global styles */
 @import 'reset.css';
 @import 'typography.css';
+@import 'detail.css';
 
 
 /*.layout and view styling */
@@ -8,7 +9,7 @@
 @import '../server/views/index.css';
 @import '../server/views/index.css';
 @import '../server/views/books.css';
-@import '../server/views/detail.css';
+
 @import '../server/views/favorites.css';
 
 /* component styling */
