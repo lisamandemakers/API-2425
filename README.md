@@ -38,7 +38,7 @@ Ik heb er uiteindelijk voor gekozen om een meer toegankelijke REST API te gebrui
 ### Structuur begrijpen & eerste ontwerp
 In het begin snapte ik niks van de mapstructuur van de server, client, views, etc. Ik heb tijd genomen om dit goed uit te pluizen en daarna werd het werken met de bestanden een stuk logischer. Ook is het me gelukt om een eigen CSS-bestand te koppelen en wat eerste stijlelementen toe te voegen.
 
-Cyd gaf aan dat ik nog niet goed in beeld had wat ik nou precies ging maken. Daarom ben ik aan de slag gegaan met ontwerpen in Adobe XD. (Ik voeg hier ook foto's van toe aan het verslag.)
+Cyd gaf aan dat ik nog niet goed in beeld had wat ik nou precies ging maken. Daarom ben ik aan de slag gegaan met ontwerpen in Adobe XD. Hier zie je de schetsen ![Alt-tekst van afbeelding](/images/gradient-background.jpg)
 
 ### Voortgangsgesprek & Feedback
 - Canvas API en Vibration API genoemd als inspiratie
