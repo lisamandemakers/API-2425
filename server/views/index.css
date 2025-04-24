@@ -16,6 +16,7 @@ main {
 
 }
 
+
 /* Zoekformulier styling */
 .search {
   margin: 20px auto;
@@ -95,28 +96,25 @@ main {
 /* Algemeen formulier styling */
 .search-form {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   gap: 15px;
   align-items: center;
-  max-width: 600px;
+/* background-color: aqua; */
   margin-bottom: 3rem;
 }
 
-.search-input {
-  width: 100%;
-}
+
 
 .search-input-field {
-  width: 100%;
+
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
 }
 
-.search-category {
-  width: 100%;
-}
+
 
 .search-category-select {
   width: 100%;
@@ -138,6 +136,16 @@ main {
 
 .search-button:hover {
   background-color: #6a7ec2; /* Donkerdere tint voor hover */
+}
+
+.favorites-button {
+  padding: 12.4px 20px;
+  background-color: var(--pink);
+  color: black;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 16px;
+  max-width: 250px;
 }
 
 /* Styling voor kleine schermen (mobiel) */
@@ -189,13 +197,3 @@ main {
   display: block;
 }
 
-.favorites-button {
-  display: inline-block;
-  margin-bottom: 20px;
-  padding: 10px 15px;
-  background-color: gold;
-  color: black;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: bold;
-}

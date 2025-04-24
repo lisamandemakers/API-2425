@@ -27,7 +27,7 @@ h1 {
 h2 {
   font-family: var( --main-font);
   font-size: 2rem;
-  /* margin-bottom: 1em; */
+  margin-bottom: 1em;
   opacity: 0.5;
 }
 
