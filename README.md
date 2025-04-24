@@ -82,8 +82,34 @@ De favorieten worden weergegeven in een apart overzicht in de vorm van kaartjes 
 
 ## Week 4
 
-### Web API's en afwerking
-Deze week wilde ik in eerste instantie de Canvas API gebruiken, maar uiteindelijk heb ik ervoor gekozen om de Speech API en Vibration API te integreren in mijn applicatie. De Speech API leest nu bijvoorbeeld de titel van het boek voor als feedback bij toevoegen aan favorieten. De Vibration API zorgt voor een korte trilling bij interactie, wat zorgt voor een rijkere gebruikerservaring.
+## Web API's
+
+### 🔊 Speech API
+In mijn applicatie heb ik de Web Speech API geïntegreerd om de boekbeschrijvingen voor te laten lezen. Wanneer je op de knop "🔊 Read Aloud" klikt, wordt de tekst van de beschrijving hardop voorgelezen door de browser. Dit maakt de applicatie toegankelijker én leuker om te gebruiken, vooral voor mensen die moeite hebben met lezen of gewoon liever luisteren.
+
+De gebruiker kan op elk moment het voorlezen stoppen met dezelfde knop. Als het voorlezen klaar is, verandert de knoptekst automatisch weer terug. Ik heb gekozen voor de taal `en-US`, zodat de uitspraak van Engelse boekbeschrijvingen goed klinkt.
+
+Het toevoegen van deze API zorgt voor een interactieve en persoonlijke ervaring, wat goed past bij mijn doel: een boekenapp maken die net zo levendig en boeiend is als het lezen zelf.
+
+![Alt-tekst van afbeelding](./client/images/speechapi.png) 
+
+
+
+
+---
+
+### 📳 Vibration API
+Om de gebruikersinteractie tastbaarder te maken, heb ik de Vibration API toegevoegd. Telkens wanneer een gebruiker een boek toevoegt aan zijn of haar favorieten, trilt het apparaat kort (100 milliseconden). Dit gebeurt alleen als het apparaat vibratie ondersteunt.
+
+Deze subtiele feedback zorgt ervoor dat de actie van het toevoegen van een favoriet duidelijker en bevredigender aanvoelt. Zeker op mobiele apparaten is dit een fijne toevoeging, omdat het de gebruikerservaring versterkt zonder visuele elementen te overladen.
+
+---
+
+Deze twee Web API's zijn voorbeelden van hoe relatief simpele technieken kunnen bijdragen aan een rijkere en persoonlijkere gebruikerservaring. Ik vond het leuk om hiermee te experimenteren en ze toe te passen in een applicatie die voortkomt uit mijn liefde voor lezen.
+
+![Alt-tekst van afbeelding](./client/images/vibrationapi.png) 
+
+
 
 ### Laatste details
 Ik heb de styling van de applicatie verder afgerond, foutafhandeling toegevoegd voor lege zoekresultaten, en verschillende onderdelen getest. Daarnaast is de server voorzien van console logs die aangeven of de verschillende categorieën succesvol worden geladen.

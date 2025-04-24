@@ -50,9 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-// 🔊 WEB SPEECH API
-// 🔊 SPEECH API
 // 🔊 SPEECH API
 document.addEventListener('DOMContentLoaded', () => {
   const speakBtn = document.querySelector('#speakButton');
