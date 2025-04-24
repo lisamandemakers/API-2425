@@ -4,26 +4,6 @@
 <div class="favorite-content">
   <a href="http://localhost:3000/" class="back-button-favorites">← Terug naar Home</a>
 <h1>Your favorites</h1>
-{% comment %} 
-<ul class="favorites-list">
-  {% if favorites.length == 0 %}
-    <p>Je hebt nog geen favorieten.</p>
-  {% else %}
-    {% for book in favorites %}
-      <li>
- 
-        <h3>{{ book.title }}</h3>
-
-
-        <!-- Verwijderknop -->
-        <form action="/favorites/delete/{{ book.id }}" method="POST" style="margin-top: 10px;">
-          <button type="submit">🗑️ Verwijder</button>
-        </form>
-      </li>
-    {% endfor %}
-  {% endif %}
-</ul> {% endcomment %}
-
 <div class="bookcase">
   <!-- Eerste plank -->
   <div class="shelf">
@@ -62,7 +42,6 @@
     {% endif %}
   </div>
 
-  
 
   <!-- Tweede plank -->
   <div class="shelf">

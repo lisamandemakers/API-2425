@@ -1,3 +1,4 @@
+/* 🌅 Algemene styling */
 .favorite-content {
   background-image: url('/images/gradient-background.jpg');
   background-size: cover;
@@ -10,14 +11,15 @@
   margin: 0;
 }
 
+/* 📚 Boekenplank styling */
 .bookcase {
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding: 10px;
- 
 }
 
+/* 🪑 Plank styling */
 .shelf {
   display: flex;
   justify-content: center;
@@ -36,9 +38,9 @@
     0px 20px 20px 10px black, 
     inset 0px 10px 10px 0px darkgray;
   gap: 12px;
-
 }
 
+/* 📖 Boeken styling */
 .book {
   position: relative;
   width: 50px;
@@ -55,12 +57,14 @@
   overflow: hidden;
 }
 
+/* 📘 Specifieke boekkleuren */
 .shelf .book:nth-child(1) { background-color: #8691F2; }
 .shelf .book:nth-child(2) { background-color: #F3D6F2; }
 .shelf .book:nth-child(3) { background-color: #CED0F6; }
 .shelf .book:nth-child(4) { background-color: #EBCCCC; }
 .shelf .book:nth-child(5) { background-color: #8691F2; }
 
+/* 📚 Boek titel styling */
 .book-title-shelf {
   color: var(--dark-blue);
   font-weight: 600;
@@ -81,18 +85,18 @@
   box-sizing: border-box;
 }
 
+/* 🖋️ Boek links */
 .book a {
   text-decoration: none;
 }
 
-/* Hover animatie */
+/* 💥 Hover animatie voor boeken */
 .book:hover {
   transform: scale(1.1);
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
 }
 
-
-
+/* 🗑️ Verwijder knop styling */
 .delete-btn {
   background: white;
   border-radius: 50%;
@@ -102,12 +106,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
 }
 
-
-
-/* 📱 Mobiel */
+/* 📱 Mobiele weergave */
 @media (max-width: 480px) {
   .bookcase {
     gap: 16px;
@@ -118,9 +119,8 @@
     height: 80px;
   }
 
-  
-  .book-title-shelf{
-      font-size: 0.23em;
+  .book-title-shelf {
+    font-size: 0.23em;
   }
 
   .shelf {
@@ -140,10 +140,9 @@
     width: 60px;
     height: 140px;
   }
-
 }
 
-
+/* 🔙 Terug knop favorieten */
 .back-button-favorites {
   text-decoration: none;
   color: var(--dark-blue);
@@ -155,10 +154,8 @@
   transition: 0.2s ease-in;
 }
 
+/* 🖤 Hover effect op de terug knop */
 .back-button-favorites:hover {
   color: #000;
   scale: 1.1;
 }
-
-
-

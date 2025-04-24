@@ -1,63 +1,91 @@
+/* ============================
+   🌈 ROOT VARIABELEN
+============================= */
 :root {
-  /* fonts */
+  /* Fonts */
   --main-font: NewYork;
   --body-text-font: inter;
 
-  /* colors */
+  /* Kleuren */
   --dark-blue: #092353;
   --purple: #8C92EF;
   --pink: #F3D6F2;
-
 }
 
+
+/* ============================
+   📄 ALGEMENE STYLING
+============================= */
 main {
- display: flex;
- flex-direction: column;
-
+  display: flex;
+  flex-direction: column;
 }
 
 
-/* Zoekformulier styling */
+/* ============================
+   🔍 ZOEKFORMULIER
+============================= */
 .search {
   margin: 20px auto;
   text-align: center;
 }
 
-/* Grid voor de boeken */
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.search-input-field,
+.search-category-select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.search-category-select {
+  width: 100%;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: var(--purple);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #6a7ec2;
+}
+
+
+/* ============================
+   📚 BOEKEN GRID
+============================= */
 .books-grid {
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 3rem;
-  /* padding-top: 1rem; */
 }
 
-@keyframes cloudEffect {
-  0% {
-    box-shadow: inset 0 -110px 25px -30px rgba(255, 255, 255);
-  }
-  25% {
-    box-shadow: inset 20px -100px 30px -20px rgba(255, 255, 255);
-  }
-  50% {
-    box-shadow: inset -10px -120px 80px -25px rgba(255, 255, 255);
-  }
-  75% {
-    box-shadow: inset 10px -105px 30px -30px rgba(255, 255, 255);
-  }
-  100% {
-    box-shadow: inset 0 -110px 25px -30px rgba(255, 255, 255);
-  }
-}
 
+/* ============================
+   📖 BOEK KAARTEN
+============================= */
 .book-card {
   position: relative;
-  /* overflow: hidden; */
   border-radius: 10px;
+  box-shadow: inset 0 -110px 25px -30px rgb(255, 255, 255);
   /* animation: cloudEffect 6s ease-in-out infinite; */
-
 }
-
 
 .book-card img {
   width: 100%;
@@ -68,23 +96,26 @@ main {
   position: relative;
 }
 
-.book-card .overlay {
-  position: absolute;
-  bottom: 10; /* Onderaan positioneren */
-  left: 0;
-  width: 100%;
-  font-weight: 400;
-  color: var(--dark-blue);
-  background-color: #6a7ec2;
-  transition: opacity 0.3s ease;
-  margin-top: 40px;
-  border-radius: 0 0 10px 10px;
-  text-align: left;
-  opacity: 0;
-  box-shadow: inset 0 -110px 25px -30px rgb(255, 255, 255);
+.book-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
-.book-card{
+/* Overlay bij hover */
+.book-card .overlay {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  background-color: #6a7ec2;
+  color: var(--dark-blue);
+  font-weight: 400;
+  text-align: left;
+  border-radius: 0 0 10px 10px;
+  opacity: 0;
+  margin-top: 40px;
+  transition: opacity 0.3s ease;
   box-shadow: inset 0 -110px 25px -30px rgb(255, 255, 255);
 }
 
@@ -93,51 +124,21 @@ main {
 }
 
 
-/* Algemeen formulier styling */
-.search-form {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  gap: 15px;
-  align-items: center;
-/* background-color: aqua; */
-  margin-bottom: 3rem;
+/* ============================
+   🌥️ ANIMATIE EFFECT
+============================= */
+@keyframes cloudEffect {
+  0%   { box-shadow: inset 0 -110px 25px -30px rgba(255, 255, 255); }
+  25%  { box-shadow: inset 20px -100px 30px -20px rgba(255, 255, 255); }
+  50%  { box-shadow: inset -10px -120px 80px -25px rgba(255, 255, 255); }
+  75%  { box-shadow: inset 10px -105px 30px -30px rgba(255, 255, 255); }
+  100% { box-shadow: inset 0 -110px 25px -30px rgba(255, 255, 255); }
 }
 
 
-
-.search-input-field {
-
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-
-
-.search-category-select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-.search-button {
-  padding: 10px 20px;
-  background-color: #8C92EF; /* Kleur voor de button */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.search-button:hover {
-  background-color: #6a7ec2; /* Donkerdere tint voor hover */
-}
-
+/* ============================
+   🌟 FAVORIETEN KNOP
+============================= */
 .favorites-button {
   padding: 12.4px 20px;
   background-color: var(--pink);
@@ -148,52 +149,41 @@ main {
   max-width: 250px;
 }
 
-/* Styling voor kleine schermen (mobiel) */
-@media (max-width: 400px) {
-  main {
 
-    grid-template-columns: repeat(10px, 1fr);
-  }
-
-  .books-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1em;
-    margin-top: 2em;
-  }
-
-  
-  }
-
-/* banner */
+/* ============================
+   🏠 HOMEPAGE BANNER
+============================= */
 .home-banner {
   display: flex;
   justify-content: center;
   align-items: center;
- 
   margin-bottom: 2em;
   background-image: url('/images/gradient-background.jpg');
   flex-wrap: wrap;
-  /* background-size: cover; */
 }
 
-.home-banner img  {
+.home-banner img {
   width: 500px;
 }
 
 .home-banner .text-box {
   margin: 5em;
-
 }
 
 
-/* book content */
+/* ============================
+   📑 BOEK DETAIL PAGINA
+============================= */
 .book-content {
   margin: 3rem 5rem;
 }
 
-.book-card a {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
 
+/* ============================
+   📱 RESPONSIVE DESIGN
+============================= */
+@media (max-width: 400px) {
+  .book-card .overlay {
+    opacity: 1;
+  }
+}

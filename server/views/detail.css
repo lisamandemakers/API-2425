@@ -1,3 +1,4 @@
+/* 🌟 Algemene pagina-instellingen */
 .detail-page {
   display: flex;
   height: 100vh;
@@ -5,6 +6,7 @@
   font-family: sans-serif;
 }
 
+/* 📚 Boekcover sectie */
 .book-cover {
   position: relative;
   width: 33.33%;
@@ -15,57 +17,50 @@
   align-items: center;
   justify-content: space-around;
   padding: 2rem;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
+/* 🔗 Link boven op de boekcover */
 .book-cover a {
-position: absolute;
-top: 2em;
-font-family: Inter;
-color: var(--dark-blue);
-font-weight: 500;
-
- 
+  position: absolute;
+  top: 2em;
+  font-family: Inter;
+  color: var(--dark-blue);
+  font-weight: 500;
 }
 
+/* 📷 Boekcover afbeelding */
 .book-cover img {
- width: 70%;
- object-fit: cover;
+  width: 70%;
+  object-fit: cover;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   z-index: 2;
   border-radius: 10px;
-
 }
 
+/* 📝 Boekinformatie sectie */
 .book-info {
   width: 66.66%;
   padding: 6rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem; /* ruimte tussen blokken */
+  gap: 2rem; /* Ruimte tussen blokken */
 }
 
-.book-info h2 {
-  margin: 0;
-}
-
+/* 📅 Boekjaar */
 .book-year {
   font-size: 1rem;
   color: #aaa;
   margin-bottom: 0.5rem;
 }
 
-
+/* 📖 Boekbeschrijving */
 .book-description {
   height: 40vh;
-  overflow-y: auto; /* scroll werkt nu echt */
+  overflow-y: auto; /* Scroll werkt nu echt */
   padding-right: 1rem;
   line-height: 1.5;
   font-weight: 400;
-
-
-
-
 }
 
 .book-description::-webkit-scrollbar {
@@ -77,19 +72,20 @@ font-weight: 500;
   border-radius: 3px;
 }
 
-/* btn container */
-
+/* 💬 Knoppen sectie */
 .btn-container {
   display: flex;
-gap: 2em;
+  gap: 2em;
 }
-
 
 .book-buttons {
   display: flex;
   gap: 1rem;
 }
- .favorite-btn, .speak-btn {
+
+/* ❤️ Favoriete knop */
+.favorite-btn,
+.speak-btn {
   padding: 0.8rem 1.5rem;
   background-color: var(--purple);
   color: var(--dark-blue);
@@ -105,11 +101,12 @@ gap: 2em;
   padding-right: 3em;
 }
 
+/* 🎤 Spreekknop */
 .speak-btn::after {
   content: "\f075";
   font-family: 'Font Awesome 5 Free';
   font-weight: 400; /* Outline */
-  color: var(--purple); /* Kleur blijft rood */
+  color: var(--purple); /* Kleur blijft paars */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -121,15 +118,13 @@ gap: 2em;
   bottom: 0.5em;
   border-radius: 50%;
   transition: font-weight 0.3s ease;
-
 }
 
-
+/* 💖 Favoriete knop styling */
 .favorite-btn {
   background-color: var(--pink);
- color: var(--dark-blue);
+  color: var(--dark-blue);
 }
-
 
 .favorite-btn::after {
   content: "\f004";
@@ -149,18 +144,17 @@ gap: 2em;
   transition: font-weight 0.3s ease;
 }
 
-
-
+/* ❤️ Favoriete knop wanneer het item is geliket */
 .favorite-btn.liked::after {
   font-weight: 900; /* Gevuld hart */
 }
+
+/* 🖤 Hover effect voor knoppen */
 .book-buttons .btn:hover {
   background-color: #444;
 }
 
-
-
-
+/* 🔙 Navigatiebalk */
 .navigation-bar {
   display: flex;
   justify-content: space-between;
@@ -172,6 +166,7 @@ gap: 2em;
   color: #555;
 }
 
+/* ⬅️ Terugknop in de navigatiebalk */
 .back-button {
   text-decoration: none;
   color: #333;
@@ -183,14 +178,11 @@ gap: 2em;
   color: #000;
 }
 
-
-
-
-
+/* 📱 Mobiele weergave */
 @media (max-width: 768px) {
   .detail-page {
     flex-direction: column;
-    height: auto; /* zodat alles netjes meegroeit */
+    height: auto; /* Alles past zich nu automatisch aan */
   }
 
   .book-cover {
@@ -201,7 +193,7 @@ gap: 2em;
   }
 
   .book-cover img {
-    width: 40%; /* iets ruimer voor mobiel */
+    width: 40%; /* Iets ruimer voor mobiel */
     border-radius: 10px;
     position: absolute;
     margin-top: 200px;
@@ -210,16 +202,16 @@ gap: 2em;
   .book-info {
     width: 100%;
     padding: 2rem 1.5rem;
-    margin-top:8em;
+    margin-top: 8em;
   }
 
   .book-description {
-    height: auto; /* geen vaste hoogte meer op mobiel */
-    max-height: 40vh; /* eventueel max hoogte behouden */
+    height: auto; /* Geen vaste hoogte meer op mobiel */
+    max-height: 40vh; /* Eventueel max hoogte behouden */
     margin-right: 3em;
   }
+
   .book-cover a {
     left: 30px;
-
   }
 }
